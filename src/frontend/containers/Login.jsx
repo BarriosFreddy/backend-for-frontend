@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginRequest } from "../actions";
+import { loginUser } from "../actions";
 import '../assets/styles/components/Login.scss';
 import Header from '../components/Header';
 import googleIcon from '../assets/static/google-icon.png';
@@ -23,9 +23,10 @@ const Login = props => {
   };
 
   const handleSubmit = event => {
+    console.log('submit');
+    
     event.preventDefault();
-    props.loginRequest(form);
-    props.history.push('/login');
+    props.loginUser(form, '/');
   }
 
   return (
@@ -49,7 +50,7 @@ const Login = props => {
               placeholder="Contraseña"
               onChange={updateInput}
             />
-            <button className="button" type="button">Iniciar sesión</button>
+            <button className="button" type="submit">Iniciar sesión</button>
             <div className="login__container--remember-me">
               <label htmlFor="first_checkbox">
                 <input type="checkbox" id="cbox1" value="first_checkbox" />
@@ -84,11 +85,11 @@ const Login = props => {
 }
 
 const mapDispatchToProps = {
-  loginRequest,
+  loginUser,
 };
 
 Login.propTypes = {
-  loginRequest: PropTypes.func,
+  loginUser: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
